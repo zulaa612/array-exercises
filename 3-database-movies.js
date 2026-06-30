@@ -148,7 +148,10 @@ const movies = [
 function countMovies(db) {
   return db.length;
 }
-console.log(countMovies(movies)); // 16
+console.log(countMovies(movies)); 
+console.log(countMovies([]));
+console.log(countMovies([movies[0]]));
+
 // TEST 1:  countMovies(movies)   ->  16
 // TEST 2:  countMovies([])       ->  0
 // TEST 3:  countMovies([movies[0]]) -> 1
@@ -156,6 +159,12 @@ console.log(countMovies(movies)); // 16
 // ----- 2. filter by genre -----
 // Write `byGenre(db, genre)` -> array of movies in that genre.
 // your code here
+function byGenre(db, genre){
+  return db.filter((n) => n.genre === genre);
+}
+console.log(byGenre(movies, "scifi").length);
+console.log(byGenre(movies, "anime").length);
+console.log(byGenre(movies, "horror").length);
 
 // console.log(byGenre(movies, "scifi").length);
 // TEST 1:  byGenre(movies,"scifi").length   ->  3
@@ -165,6 +174,12 @@ console.log(countMovies(movies)); // 16
 // ----- 3. filter + condition -----
 // Write `topRated(db)` -> movies with rating >= 8.7.
 // your code here
+function topRated(db){
+  return db.filter((db) => db.rating >= 8.7);
+}
+console.log(topRated(movies).length);
+console.log(topRated(movies).every(m => m.rating >= 8.7));
+console.log(topRated([{rating:5}]).length);
 
 // console.log(topRated(movies).length);
 // TEST 1:  topRated(movies).length                          ->  7
@@ -174,6 +189,12 @@ console.log(countMovies(movies)); // 16
 // ----- 4. map — just the titles -----
 // Write `allTitles(db)` -> array of every title (strings only).
 // your code here
+function allTitles(db){
+  return db.map((db) => db.title);
+}
+console.log(allTitles(movies)[0]);
+console.log(allTitles(movies).length);
+console.log(allTitles(movies)[15]);
 
 // console.log(allTitles(movies)[0]);
 // TEST 1:  allTitles(movies)[0]        ->  "The Shawshank Redemption"
@@ -183,6 +204,13 @@ console.log(countMovies(movies)); // 16
 // ----- 5. find by title -----
 // Write `findByTitle(db, title)` -> the one movie object, or undefined.
 // your code here
+function findByTitle(db, title){
+  return db.find((m) => m.title === title);
+}
+console.log(findByTitle(movies, "Joker").year);
+console.log(findByTitle(movies, "Dune").oscars);
+console.log(findByTitle(movies, "Not Real"));
+
 
 // console.log(findByTitle(movies, "Joker").year);
 // TEST 1:  findByTitle(movies,"Joker").year     ->  2019
@@ -193,6 +221,14 @@ console.log(countMovies(movies)); // 16
 // Write `totalOscars(db)` -> sum of every movie's .oscars.
 // your code here
 
+function totalOscars(db){
+  return db.reduce((n, movie) => movie.oscars + n, 0);
+}
+console.log(totalOscars(movies));
+console.log(totalOscars([]));
+console.log(totalOscars([{oscars: 3}]));
+
+
 // console.log(totalOscars(movies));
 // TEST 1:  totalOscars(movies)            ->  52
 // TEST 2:  totalOscars([])                ->  0
@@ -202,6 +238,12 @@ console.log(countMovies(movies)); // 16
 // Write `averageRating(db)` -> mean rating, rounded to 1 decimal.
 // Hint: total / length, then Number(x.toFixed(1)).
 // your code here
+function averageRating(db){
+  return Number(db.reduce((total, movie) => movie.rating + total, 0)/ db.length).toFixed(1);
+}
+console.log(averageRating(movies));
+console.log(averageRating([{rating: 8}, {rating: 9}]));
+console.log(averageRating([{rating: 7}]));
 
 // console.log(averageRating(movies));
 // TEST 1:  averageRating(movies)                    ->  8.6
@@ -212,6 +254,16 @@ console.log(countMovies(movies)); // 16
 // Write `bestFirst(db)` -> NEW array sorted by rating, highest first.
 // Hint: [...db].sort((a,b) => b.rating - a.rating)  (copy first!)
 // your code here
+function bestFirst(db){
+  return db.sort((a, b) => b.rating - a.rating);
+}
+console.log(bestFirst(movies)[0].title);
+console.log(bestFirst(movies)[0].rating);
+console.log(bestFirst(movies).length);
+
+// sort — order the array. For NUMBERS you MUST give (a,b)=>a-b
+// console.log([3, 1, 2].sort((a, b) => a - b)); // [1,2,3]
+// console.log([3, 1, 2].sort((a, b) => b - a)); // [3,2,1]
 
 // console.log(bestFirst(movies)[0].title);
 // TEST 1:  bestFirst(movies)[0].title    ->  "The Shawshank Redemption"
@@ -221,6 +273,16 @@ console.log(countMovies(movies)); // 16
 // ----- 9. chain — filter + sort + map -----
 // Write `bestActionTitles(db)` -> action movies, sorted best-first, titles only.
 // your code here
+
+
+function bestActionTitles(db){
+  db.filter((db) => db.genre === "action");
+  db.sort((a, b) => b.rating - a.rating);
+  return db.map((db) => db.title);
+}
+console.log(bestActionTitles(movies)[0]);
+console.log(bestActionTitles(movies).length);
+console.log(bestActionTitles(movies)[3]);
 
 // console.log(bestActionTitles(movies));
 // TEST 1:  bestActionTitles(movies)[0]       ->  "The Dark Knight"

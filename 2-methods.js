@@ -55,9 +55,7 @@ console.log(withTax([100]));
 // Write `cheap(prices)` that RETURNS a NEW array of prices under 20.
 // your code here
 function cheap(prices){
-  if (prices < 20){
-    return prices;
-  }
+  return prices.find((p) => p < 20);
 }
 console.log(cheap([10, 25, 5, 40, 15]));
 console.log(cheap([100, 200]));
@@ -72,7 +70,12 @@ console.log(cheap([19, 20, 21]));
 // ----- 3. find -----
 // Write `firstExpensive(prices)` that RETURNS the first price over 30.
 // your code here
-
+function firstExpensive(prices){
+  return prices.find((p) => p > 30);
+}
+console.log(firstExpensive([10, 25, 5, 40, 15]));
+console.log(firstExpensive([1, 2, 3]));
+console.log(firstExpensive([50, 99]));
 // console.log(firstExpensive([10, 25, 5, 40, 15]));
 // TEST 1:  firstExpensive([10,25,5,40,15])   ->  40
 // TEST 2:  firstExpensive([1,2,3])           ->  undefined
@@ -81,7 +84,12 @@ console.log(cheap([19, 20, 21]));
 // ----- 4. reduce (sum) -----
 // Write `total(prices)` that RETURNS the sum using reduce.
 // your code here
-
+function total(prices){
+  return prices.reduce((p, n) => p + n, 0);
+}
+console.log(total([10, 25, 5, 40, 15]));
+console.log(total([]));
+console.log(total([7]));
 // console.log(total([10, 25, 5, 40, 15]));
 // TEST 1:  total([10,25,5,40,15])   ->  95
 // TEST 2:  total([])                ->  0
@@ -91,7 +99,15 @@ console.log(cheap([19, 20, 21]));
 // Write `anyFree(prices)` -> true if ANY price is 0.
 // Write `allPositive(prices)` -> true if EVERY price is > 0.
 // your code here
-
+function anyFree(prices){
+  return prices.some((p) => p === 0);
+}
+function allPositive(prices){
+  return prices.every((p) => p > 0);
+}
+console.log(anyFree([10, 0, 5]));
+console.log(allPositive([10, 0, 5]));
+console.log(allPositive([10, 5]));
 // console.log(anyFree([10, 0, 5]), allPositive([10, 0, 5]));
 // TEST 1:  anyFree([10,0,5])       ->  true
 // TEST 2:  allPositive([10,0,5])   ->  false
@@ -101,6 +117,13 @@ console.log(cheap([19, 20, 21]));
 // Write `lowToHigh(prices)` that RETURNS the prices sorted ascending.
 // Hint: numbers need .sort((a,b) => a - b)
 // your code here
+function lowToHigh(prices){
+  return prices.sort((a, b) => a-b);
+}
+console.log(lowToHigh([10, 25, 5, 40, 15]));
+console.log(lowToHigh([3, 2, 1]));
+console.log(lowToHigh([2]));
+
 
 // console.log(lowToHigh([10, 25, 5, 40, 15]));
 // TEST 1:  lowToHigh([10,25,5,40,15])   ->  [5,10,15,25,40]
@@ -110,6 +133,12 @@ console.log(cheap([19, 20, 21]));
 // ----- 7. chain: filter then map -----
 // Write `cheapDoubled(prices)` -> keep prices under 20, then double each.
 // your code here
+function cheapDoubled(prices){
+  return prices.filter((p) => p < 20).map((p) => p * 2);
+}
+console.log(cheapDoubled([10, 25, 5, 40, 15]));
+console.log(cheapDoubled([100]));
+console.log(cheapDoubled([5, 5]));
 
 // console.log(cheapDoubled([10, 25, 5, 40, 15]));
 // TEST 1:  cheapDoubled([10,25,5,40,15])   ->  [20,10,30]
@@ -126,6 +155,14 @@ const inventory = [
   { name: "cup", stock: 0 },
 ];
 // your code here
+
+function inStockNames(items){
+  items.filter(item => item.stock > 0);
+  return items.map(item => item.name);
+}
+console.log(inStockNames(inventory));
+console.log(inStockNames([]));
+console.log(inStockNames([{name: "x", stock: 1}]));
 
 // console.log(inStockNames(inventory));
 // TEST 1:  inStockNames(inventory)                        ->  ["pen","bag"]
