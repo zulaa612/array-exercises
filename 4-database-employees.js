@@ -35,7 +35,9 @@ const employees = [
 function countEmployees(db) {
   return db.length;
 }
-console.log(countEmployees(employees)); // 15
+console.log(countEmployees(employees));
+console.log(countEmployees([]));
+console.log(countEmployees([employees[0]])); 
 // TEST 1:  countEmployees(employees)   ->  15
 // TEST 2:  countEmployees([])          ->  0
 // TEST 3:  countEmployees([employees[0]]) -> 1
@@ -43,7 +45,12 @@ console.log(countEmployees(employees)); // 15
 // ----- 2. filter by department -----
 // Write `byDept(db, dept)` -> array of employees in that department.
 // your code here
-
+function byDept(db, dept){
+  return db.filter((n) => n.dept === dept);
+}
+console.log(byDept(employees, "engineering").length);
+console.log(byDept(employees, "support").length);
+console.log(byDept(employees, "legal").length);
 // console.log(byDept(employees, "engineering").length);
 // TEST 1:  byDept(employees,"engineering").length   ->  4
 // TEST 2:  byDept(employees,"support").length       ->  2
@@ -52,6 +59,12 @@ console.log(countEmployees(employees)); // 15
 // ----- 3. filter + condition — high earners -----
 // Write `highEarners(db)` -> employees with salary > 90000.
 // your code here
+function highEarners(db){
+  return db.filter((db) => db.salary > 90000);
+}
+console.log(highEarners(employees).length);
+console.log(highEarners(employees).map(e => e.name).includes("Jon"));
+console.log(highEarners(employees).map(e => e.name).includes("Omar"));
 
 // console.log(highEarners(employees).length);
 // TEST 1:  highEarners(employees).length                            ->  4
@@ -61,7 +74,12 @@ console.log(countEmployees(employees)); // 15
 // ----- 4. map — just the names -----
 // Write `allNames(db)` -> array of every employee name.
 // your code here
-
+function allNames(db){
+  return db.map((db) => db.name);
+}
+console.log(allNames(employees)[0]);
+console.log(allNames(employees).length);
+console.log(allNames(employees)[14]);
 // console.log(allNames(employees)[0]);
 // TEST 1:  allNames(employees)[0]       ->  "Sara"
 // TEST 2:  allNames(employees).length   ->  15
@@ -70,6 +88,12 @@ console.log(countEmployees(employees)); // 15
 // ----- 5. find by name -----
 // Write `findEmployee(db, name)` -> the one object, or undefined.
 // your code here
+function findEmployee(db, name){
+  return db.find((n) => n.name === name)
+}
+console.log(findEmployee(employees, "Eva").dept);
+console.log(findEmployee(employees, "Eva").salary);
+console.log(findEmployee(employees, "Ghost"));
 
 // console.log(findEmployee(employees, "Eva").dept);
 // TEST 1:  findEmployee(employees,"Eva").dept     ->  "design"
@@ -79,6 +103,12 @@ console.log(countEmployees(employees)); // 15
 // ----- 6. reduce — total payroll -----
 // Write `totalPayroll(db)` -> sum of every salary.
 // your code here
+function totalPayroll(db){
+  return db.reduce((total, employee) => total + employee.salary, 0);
+}
+console.log(totalPayroll(employees));
+console.log(totalPayroll([]));
+console.log(totalPayroll([{salary: 100}]));
 
 // console.log(totalPayroll(employees));
 // TEST 1:  totalPayroll(employees)         ->  1208000
@@ -88,7 +118,9 @@ console.log(countEmployees(employees)); // 15
 // ----- 7. average salary -----
 // Write `averageSalary(db)` -> mean salary, rounded with Math.round.
 // your code here
-
+function averageSalary(db){
+  
+}
 // console.log(averageSalary(employees));
 // TEST 1:  averageSalary(employees)                       ->  80533
 // TEST 2:  averageSalary([{salary:100},{salary:200}])     ->  150

@@ -148,7 +148,7 @@ const movies = [
 function countMovies(db) {
   return db.length;
 }
-console.log(countMovies(movies)); 
+console.log(countMovies(movies));
 console.log(countMovies([]));
 console.log(countMovies([movies[0]]));
 
@@ -159,7 +159,7 @@ console.log(countMovies([movies[0]]));
 // ----- 2. filter by genre -----
 // Write `byGenre(db, genre)` -> array of movies in that genre.
 // your code here
-function byGenre(db, genre){
+function byGenre(db, genre) {
   return db.filter((n) => n.genre === genre);
 }
 console.log(byGenre(movies, "scifi").length);
@@ -174,12 +174,12 @@ console.log(byGenre(movies, "horror").length);
 // ----- 3. filter + condition -----
 // Write `topRated(db)` -> movies with rating >= 8.7.
 // your code here
-function topRated(db){
+function topRated(db) {
   return db.filter((db) => db.rating >= 8.7);
 }
 console.log(topRated(movies).length);
 console.log(topRated(movies).every(m => m.rating >= 8.7));
-console.log(topRated([{rating:5}]).length);
+console.log(topRated([{ rating: 5 }]).length);
 
 // console.log(topRated(movies).length);
 // TEST 1:  topRated(movies).length                          ->  7
@@ -189,7 +189,7 @@ console.log(topRated([{rating:5}]).length);
 // ----- 4. map — just the titles -----
 // Write `allTitles(db)` -> array of every title (strings only).
 // your code here
-function allTitles(db){
+function allTitles(db) {
   return db.map((db) => db.title);
 }
 console.log(allTitles(movies)[0]);
@@ -204,7 +204,7 @@ console.log(allTitles(movies)[15]);
 // ----- 5. find by title -----
 // Write `findByTitle(db, title)` -> the one movie object, or undefined.
 // your code here
-function findByTitle(db, title){
+function findByTitle(db, title) {
   return db.find((m) => m.title === title);
 }
 console.log(findByTitle(movies, "Joker").year);
@@ -221,12 +221,12 @@ console.log(findByTitle(movies, "Not Real"));
 // Write `totalOscars(db)` -> sum of every movie's .oscars.
 // your code here
 
-function totalOscars(db){
+function totalOscars(db) {
   return db.reduce((n, movie) => movie.oscars + n, 0);
 }
 console.log(totalOscars(movies));
 console.log(totalOscars([]));
-console.log(totalOscars([{oscars: 3}]));
+console.log(totalOscars([{ oscars: 3 }]));
 
 
 // console.log(totalOscars(movies));
@@ -238,12 +238,12 @@ console.log(totalOscars([{oscars: 3}]));
 // Write `averageRating(db)` -> mean rating, rounded to 1 decimal.
 // Hint: total / length, then Number(x.toFixed(1)).
 // your code here
-function averageRating(db){
-  return Number(db.reduce((total, movie) => movie.rating + total, 0)/ db.length).toFixed(1);
+function averageRating(db) {
+  return Number(db.reduce((total, movie) => movie.rating + total, 0) / db.length).toFixed(1);
 }
 console.log(averageRating(movies));
-console.log(averageRating([{rating: 8}, {rating: 9}]));
-console.log(averageRating([{rating: 7}]));
+console.log(averageRating([{ rating: 8 }, { rating: 9 }]));
+console.log(averageRating([{ rating: 7 }]));
 
 // console.log(averageRating(movies));
 // TEST 1:  averageRating(movies)                    ->  8.6
@@ -254,7 +254,7 @@ console.log(averageRating([{rating: 7}]));
 // Write `bestFirst(db)` -> NEW array sorted by rating, highest first.
 // Hint: [...db].sort((a,b) => b.rating - a.rating)  (copy first!)
 // your code here
-function bestFirst(db){
+function bestFirst(db) {
   return db.sort((a, b) => b.rating - a.rating);
 }
 console.log(bestFirst(movies)[0].title);
@@ -275,10 +275,9 @@ console.log(bestFirst(movies).length);
 // your code here
 
 
-function bestActionTitles(db){
-  db.filter((db) => db.genre === "action");
-  db.sort((a, b) => b.rating - a.rating);
-  return db.map((db) => db.title);
+function bestActionTitles(db) {
+  const arr = db.filter((db) => db.genre === "action").sort((a, b) => b.rating - a.rating).map((db) => db.title);
+  return arr;
 }
 console.log(bestActionTitles(movies)[0]);
 console.log(bestActionTitles(movies).length);
@@ -293,6 +292,18 @@ console.log(bestActionTitles(movies)[3]);
 // Write `countByGenre(db)` -> object mapping each genre to how many movies.
 // Hint: result = {}; loop; result[m.genre] = (result[m.genre] || 0) + 1.
 // your code here
+function countByGenre(db){
+  result = {};
+
+  for (i = 0; i <= db.length; i++){
+    m = db[i];
+    return result[m.genre] = (result[m.genre] || 0) + 1;
+  }
+  return result;
+}
+console.log(countByGenre(movies).drama);
+console.log(countByGenre(movies).action);
+console.log(countByGenre(movies).anime);
 
 // console.log(countByGenre(movies));
 // TEST 1:  countByGenre(movies).drama    ->  5
