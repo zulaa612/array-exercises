@@ -119,7 +119,7 @@ console.log(totalPayroll([{salary: 100}]));
 // Write `averageSalary(db)` -> mean salary, rounded with Math.round.
 // your code here
 function averageSalary(db){
-  
+
 }
 // console.log(averageSalary(employees));
 // TEST 1:  averageSalary(employees)                       ->  80533
@@ -130,7 +130,7 @@ function averageSalary(db){
 // Write `remoteWorkers(db)` -> employees where remote is true.
 // your code here
 
-// console.log(remoteWorkers(employees).length);
+// console.log(remoteWorkers(employees).length);~
 // TEST 1:  remoteWorkers(employees).length                            ->  8
 // TEST 2:  remoteWorkers(employees).map(e => e.name).includes("Sara") ->  true
 // TEST 3:  remoteWorkers(employees).map(e => e.name).includes("Ali")  ->  false
